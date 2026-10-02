@@ -67,6 +67,10 @@ try {
   const matches = rows.filter(r => /^A-[^\n]+:\s*Attendance Day \d+\b/.test(r.trim()) && sameDueDate(r, today));
   if (matches.length !== 1) fail(`Expected one Attendance row due ${today.month} ${today.day}; found ${matches.length}.`);
   const row = matches[0];
+  note(`Read-only Grades row for ${today.month} ${today.day}: ${JSON.stringify(row)}`);
+  await browser.close();
+  browser = undefined;
+  process.exit(0);
   const title = row.match(/A-[^\n]+:\s*Attendance Day \d+/)?.[0];
   if (!title) fail('Could not read the dated attendance title.');
   const dueIndex = row.search(/\b[A-Z][a-z]{2}\s+\d{1,2}\s+by\s+11:59pm\b/);
