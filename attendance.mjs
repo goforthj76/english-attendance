@@ -80,12 +80,14 @@ try {
     if (await link.count() !== 1) fail(`Expected one module link for ${title}.`);
     await link.click();
     await canvas.waitForLoadState('domcontentloaded');
+    await canvas.waitForTimeout(5000);
     let body = await canvas.locator('body').innerText();
     if (/locked until|not available/i.test(body)) fail(`${title} is locked or unavailable.`);
     await canvas.getByRole('button', { name: 'Begin', exact: true }).waitFor({ timeout: 20000 });
     if (!body.includes('Complete the following question during your scheduled course time')) {
       const relevant = body.split('\n').map(x => x.trim()).filter(x => /attendance|scheduled|course time|question|instructions/i.test(x)).slice(-10).map(x => x.slice(0, 200));
-      fail(`Attendance instructions changed; review required. URL: ${canvas.url()}. Relevant page lines: ${JSON.stringify(relevant)}. Visible page: ${JSON.stringify(body.slice(0, 1400))}`);
+      const frames = canvas.frames().map(frame => ({ url: frame.url().split('?')[0], name: frame.name() }));
+      fail(`Attendance instructions changed; review required. URL: ${canvas.url()}. Relevant page lines: ${JSON.stringify(relevant)}. Visible page: ${JSON.stringify(body.slice(0, 1400))}. Frames: ${JSON.stringify(frames)}`);
     }
     await canvas.getByRole('button', { name: 'Begin', exact: true }).click();
     await canvas.getByText('Question at position 1').last().waitFor({ timeout: 20000 });
