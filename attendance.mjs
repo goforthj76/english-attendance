@@ -83,7 +83,10 @@ try {
     let body = await canvas.locator('body').innerText();
     if (/locked until|not available/i.test(body)) fail(`${title} is locked or unavailable.`);
     await canvas.getByRole('button', { name: 'Begin', exact: true }).waitFor({ timeout: 20000 });
-    if (!body.includes('Complete the following question during your scheduled course time')) fail('Attendance instructions changed; review required.');
+    if (!body.includes('Complete the following question during your scheduled course time')) {
+      const relevant = body.split('\n').map(x => x.trim()).filter(x => /attendance|scheduled|course time|question|instructions/i.test(x)).slice(-10).map(x => x.slice(0, 200));
+      fail(`Attendance instructions changed; review required. Relevant page lines: ${JSON.stringify(relevant)}`);
+    }
     await canvas.getByRole('button', { name: 'Begin', exact: true }).click();
     await canvas.getByText('Question at position 1').last().waitFor({ timeout: 20000 });
     body = await canvas.locator('body').innerText();
