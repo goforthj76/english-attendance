@@ -67,10 +67,6 @@ try {
   const matches = rows.filter(r => /^A-[^\n]+:\s*Attendance Day \d+\b/.test(r.trim()) && sameDueDate(r, today));
   if (matches.length !== 1) fail(`Expected one Attendance row due ${today.month} ${today.day}; found ${matches.length}.`);
   const row = matches[0];
-  note(`Read-only Grades row for ${today.month} ${today.day}: ${JSON.stringify(row)}`);
-  await browser.close();
-  browser = undefined;
-  process.exit(0);
   const title = row.match(/A-[^\n]+:\s*Attendance Day \d+/)?.[0];
   if (!title) fail('Could not read the dated attendance title.');
   const dueIndex = row.search(/\b[A-Z][a-z]{2}\s+\d{1,2}\s+by\s+11:59pm\b/);
@@ -125,8 +121,13 @@ try {
     await canvas.getByRole('dialog').getByRole('button', { name: 'Submit', exact: true }).click();
     await canvas.waitForURL(/\/results/, { timeout: 20000 });
     await canvas.goto(`${BASE}/grades`, { waitUntil: 'domcontentloaded' });
-    const verified = await canvas.getByRole('row').filter({ hasText: title }).innerText();
-    if (!/\bComplete\b/.test(verified) || !/\b[A-Z][a-z]{2}\s+\d{1,2}\s+at\s+\d{1,2}:\d{2}(?:am|pm)\b/.test(verified)) fail('Submitted but Grades verification did not confirm Complete; inspect Canvas manually.');
+    let verified = '';
+    for (let i = 0; i < 10; i++) {
+      verified = await canvas.getByRole('row').filter({ hasText: title }).innerText();
+      if (/\bComplete\b/.test(verified) && /\b[A-Z][a-z]{2}\s+\d{1,2}\s+at\s+\d{1,2}:\d{2}(?:am|pm)\b/.test(verified)) break;
+      await canvas.waitForTimeout(1000);
+    }
+    if (!/\bComplete\b/.test(verified) || !/\b[A-Z][a-z]{2}\s+\d{1,2}\s+at\s+\d{1,2}:\d{2}(?:am|pm)\b/.test(verified)) fail(`Submitted but Grades verification did not confirm Complete. Row: ${JSON.stringify(verified)}`);
     note(`${title}: submitted and verified Complete in Canvas Grades.`);
   }
 } catch (error) {
