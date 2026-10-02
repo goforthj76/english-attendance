@@ -110,7 +110,7 @@ try {
       : null;
     if (!question) fail('Could not isolate the full question; no answer submitted.');
     const answer = answerFor(question, options);
-    if (!answer) fail(`Unrecognized question for ${title}; human review required. No answer submitted.`);
+    if (!answer) fail(`Unrecognized question for ${title}; human review required. No answer submitted. Question: ${JSON.stringify(question)}. Options: ${JSON.stringify(options)}`);
     const chosen = canvas.getByRole('radio').nth(options.indexOf(answer));
     await chosen.check();
     if (!(await chosen.isChecked())) fail('Chosen answer did not register.');
