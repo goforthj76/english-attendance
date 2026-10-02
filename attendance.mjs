@@ -90,10 +90,10 @@ try {
       fail(`Attendance instructions changed; review required. URL: ${canvas.url()}. Relevant page lines: ${JSON.stringify(relevant)}. Visible page: ${JSON.stringify(body.slice(0, 1400))}. Frames: ${JSON.stringify(frames)}`);
     }
     await canvas.getByRole('button', { name: 'Begin', exact: true }).click();
-    await canvas.getByText('Question at position 1').last().waitFor({ timeout: 20000 });
+    await canvas.getByRole('radio').first().waitFor({ timeout: 20000 });
     body = await canvas.locator('body').innerText();
     const positionCount = (body.match(/Question at position \d+\s*\n\d+\s*\n/g) || []).length;
-    if (positionCount !== 1 || await canvas.getByRole('radio').count() !== 2) fail('Quiz layout or question count changed; no answer submitted.');
+    if (positionCount !== 1 || await canvas.getByRole('radio').count() !== 2) fail(`Quiz layout or question count changed; no answer submitted. Visible quiz: ${JSON.stringify(body.slice(-1600))}`);
     const options = await canvas.getByRole('radio').evaluateAll(radios => radios.map(radio => {
       const label = radio.closest('label') || (radio.id && document.querySelector(`label[for="${CSS.escape(radio.id)}"]`));
       return label?.textContent?.trim() || '';
