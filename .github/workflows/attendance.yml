@@ -1,8 +1,6 @@
 name: English attendance
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
   # Enable only after a successful login and submission test.
   # schedule:
   #   - cron: '1 0 * * *'
