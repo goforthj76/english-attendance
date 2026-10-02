@@ -83,13 +83,17 @@ try {
     await canvas.waitForTimeout(5000);
     let body = await canvas.locator('body').innerText();
     if (/locked until|not available/i.test(body)) fail(`${title} is locked or unavailable.`);
-    await canvas.getByRole('button', { name: 'Begin', exact: true }).waitFor({ timeout: 20000 });
     if (!body.includes('Complete the following question during your scheduled course time')) {
       const relevant = body.split('\n').map(x => x.trim()).filter(x => /attendance|scheduled|course time|question|instructions/i.test(x)).slice(-10).map(x => x.slice(0, 200));
       const frames = canvas.frames().map(frame => ({ url: frame.url().split('?')[0], name: frame.name() }));
       fail(`Attendance instructions changed; review required. URL: ${canvas.url()}. Relevant page lines: ${JSON.stringify(relevant)}. Visible page: ${JSON.stringify(body.slice(0, 1400))}. Frames: ${JSON.stringify(frames)}`);
     }
-    await canvas.getByRole('button', { name: 'Begin', exact: true }).click();
+    const begin = canvas.getByRole('button', { name: 'Begin', exact: true });
+    if (await begin.isVisible()) await begin.click();
+    else {
+      const buttons = await canvas.getByRole('button').allTextContents();
+      fail(`No Begin button on attendance page; review required. Buttons: ${JSON.stringify(buttons.map(x => x.trim()).filter(Boolean).slice(-15))}. Visible page: ${JSON.stringify(body.slice(-1600))}`);
+    }
     await canvas.getByRole('radio').first().waitFor({ timeout: 20000 });
     body = await canvas.locator('body').innerText();
     const positionCount = (body.match(/Question at position \d+\s*\n\d+\s*\n/g) || []).length;
