@@ -1,11 +1,12 @@
 import { chromium } from 'playwright';
-import { appendFileSync } from 'node:fs';
+import { appendFileSync, readFileSync } from 'node:fs';
 
 const COURSE = '409368';
 const BASE = `https://lisdtx.instructure.com/courses/${COURSE}`;
 const ZONE = 'America/Chicago';
 const user = process.env.LISD_USERNAME;
 const password = process.env.LISD_PASSWORD;
+const answerBank = JSON.parse(readFileSync(new URL('./answers.json', import.meta.url), 'utf8'));
 let browser;
 
 function note(message) {
@@ -31,6 +32,13 @@ function answerFor(question, options) {
   if (q === 'which phrase is an oxymoron?' && exact.includes('Deafening silence')) return 'Deafening silence';
   if (q === 'which poetic element appeals to the five senses?' && exact.length === 2 && exact.includes('Meter') && exact.includes('Imagery')) return 'Imagery';
   if (/^a sonnet has 14 lines\.?$/.test(q) && exact.includes('True')) return 'True';
+  const entry = answerBank.answers.find(x =>
+    typeof x.question === 'string' && x.question.replace(/\s+/g, ' ').trim().toLowerCase() === q &&
+    Array.isArray(x.options) && x.options.length === exact.length &&
+    new Set(x.options).size === exact.length && exact.every(option => x.options.includes(option)) &&
+    exact.includes(x.answer)
+  );
+  if (entry) return entry.answer;
   return null;
 }
 
