@@ -1,0 +1,27 @@
+name: English attendance
+on:
+  workflow_dispatch:
+  # Enable only after a successful login and submission test.
+  # schedule:
+  #   - cron: '1 0 * * *'
+  #     timezone: America/Chicago
+permissions:
+  contents: read
+concurrency:
+  group: english-attendance
+  cancel-in-progress: false
+jobs:
+  attendance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      LISD_USERNAME: ${{ secrets.LISD_USERNAME }}
+      LISD_PASSWORD: ${{ secrets.LISD_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: npm run check
