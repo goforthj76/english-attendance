@@ -88,11 +88,11 @@ try {
       const frames = canvas.frames().map(frame => ({ url: frame.url().split('?')[0], name: frame.name() }));
       fail(`Attendance instructions changed; review required. URL: ${canvas.url()}. Relevant page lines: ${JSON.stringify(relevant)}. Visible page: ${JSON.stringify(body.slice(0, 1400))}. Frames: ${JSON.stringify(frames)}`);
     }
-    const begin = canvas.getByRole('button', { name: 'Begin', exact: true });
-    if (await begin.isVisible()) await begin.click();
+    const start = canvas.getByRole('button', { name: /^(Begin|Resume)$/ });
+    if (await start.count() === 1 && await start.isVisible()) await start.click();
     else {
       const buttons = await canvas.getByRole('button').allTextContents();
-      fail(`No Begin button on attendance page; review required. Buttons: ${JSON.stringify(buttons.map(x => x.trim()).filter(Boolean).slice(-15))}. Visible page: ${JSON.stringify(body.slice(-1600))}`);
+      fail(`No Begin or Resume button on attendance page; review required. Buttons: ${JSON.stringify(buttons.map(x => x.trim()).filter(Boolean).slice(-15))}. Visible page: ${JSON.stringify(body.slice(-1600))}`);
     }
     await canvas.getByRole('radio').first().waitFor({ timeout: 20000 });
     body = await canvas.locator('body').innerText();
