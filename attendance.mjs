@@ -113,7 +113,9 @@ try {
     const answer = answerFor(question, options);
     if (!answer) fail(`Unrecognized question for ${title}; human review required. No answer submitted. Question: ${JSON.stringify(question)}. Options: ${JSON.stringify(options)}`);
     const chosen = canvas.getByRole('radio').nth(options.indexOf(answer));
-    await chosen.check();
+    const chosenId = await chosen.getAttribute('id');
+    if (!chosenId || !/^[A-Za-z0-9_-]+$/.test(chosenId)) fail('Chosen answer has no safe label target.');
+    await canvas.locator(`label[for="${chosenId}"]`).click();
     if (!(await chosen.isChecked())) fail('Chosen answer did not register.');
     await canvas.getByRole('button', { name: 'Submit', exact: true }).last().click();
     await canvas.getByRole('dialog').getByRole('button', { name: 'Submit', exact: true }).click();
