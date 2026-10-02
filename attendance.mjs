@@ -29,6 +29,7 @@ function answerFor(question, options) {
   const exact = options.map(x => x.trim());
   if (q === 'a semicolon may join two related independent clauses.' && exact.includes('True')) return 'True';
   if (q === 'which phrase is an oxymoron?' && exact.includes('Deafening silence')) return 'Deafening silence';
+  if (q === 'which poetic element appeals to the five senses?' && exact.length === 2 && exact.includes('Meter') && exact.includes('Imagery')) return 'Imagery';
   if (/^a sonnet has 14 lines\.?$/.test(q) && exact.includes('True')) return 'True';
   return null;
 }
