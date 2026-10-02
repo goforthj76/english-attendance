@@ -72,10 +72,10 @@ try {
   await canvas.goto(`${BASE}/grades`, { waitUntil: 'domcontentloaded' });
   await canvas.getByRole('row').first().waitFor();
   const rows = await canvas.getByRole('row').allTextContents();
-  const matches = rows.filter(r => /^A-[^\n]+:\s*Attendance Day \d+\b/.test(r.trim()) && sameDueDate(r, today));
+  const matches = rows.filter(r => /^[A-Z]-[^\n]+:\s*Attendance Day \d+\b/.test(r.trim()) && sameDueDate(r, today));
   if (matches.length !== 1) fail(`Expected one Attendance row due ${today.month} ${today.day}; found ${matches.length}.`);
   const row = matches[0];
-  const title = row.match(/A-[^\n]+:\s*Attendance Day \d+/)?.[0];
+  const title = row.match(/[A-Z]-[^\n]+:\s*Attendance Day \d+/)?.[0];
   if (!title) fail('Could not read the dated attendance title.');
   const dueIndex = row.search(/\b[A-Z][a-z]{2}\s+\d{1,2}\s+by\s+11:59pm\b/);
   const afterDue = row.slice(dueIndex);
@@ -84,7 +84,7 @@ try {
     process.exitCode = 0;
   } else {
     await canvas.goto(`${BASE}/modules`, { waitUntil: 'domcontentloaded' });
-    if (!(await canvas.locator('body').innerText()).includes('Attendance -- First Nine Weeks')) fail('Current nine-weeks attendance module not found.');
+    if (!/Attendance\s*[-–—]+\s*(First|Second|Third|Fourth)\s+Nine Weeks/i.test(await canvas.locator('body').innerText())) fail('No nine-weeks attendance module found.');
     const link = canvas.getByRole('link', { name: title, exact: true });
     if (await link.count() !== 1) fail(`Expected one module link for ${title}.`);
     await link.click();
