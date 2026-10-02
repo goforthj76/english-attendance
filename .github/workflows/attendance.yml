@@ -1,12 +1,12 @@
 name: English attendance
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '1 0 * * *'
+      timezone: America/Chicago
   push:
-    branches: [main]
-  # Enable only after a successful login and submission test.
-  # schedule:
-  #   - cron: '1 0 * * *'
-  #     timezone: America/Chicago
+    paths:
+      - answers.json
 permissions:
   contents: read
 concurrency:
