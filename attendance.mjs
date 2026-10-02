@@ -85,7 +85,7 @@ try {
     await canvas.getByRole('button', { name: 'Begin', exact: true }).waitFor({ timeout: 20000 });
     if (!body.includes('Complete the following question during your scheduled course time')) {
       const relevant = body.split('\n').map(x => x.trim()).filter(x => /attendance|scheduled|course time|question|instructions/i.test(x)).slice(-10).map(x => x.slice(0, 200));
-      fail(`Attendance instructions changed; review required. Relevant page lines: ${JSON.stringify(relevant)}`);
+      fail(`Attendance instructions changed; review required. URL: ${canvas.url()}. Relevant page lines: ${JSON.stringify(relevant)}. Visible page: ${JSON.stringify(body.slice(0, 1400))}`);
     }
     await canvas.getByRole('button', { name: 'Begin', exact: true }).click();
     await canvas.getByText('Question at position 1').last().waitFor({ timeout: 20000 });
