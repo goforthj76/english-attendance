@@ -1,4 +1,13 @@
 {
-  "answers": [],
+  "answers": [
+    {
+      "question": "Symbolism allows an object or action to represent a larger idea.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "True"
+    }
+  ],
   "lastManualTrigger": "2026-10-05"
 }
