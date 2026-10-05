@@ -79,7 +79,7 @@ try {
   if (!title) fail('Could not read the dated attendance title.');
   const dueIndex = row.search(/\b[A-Z][a-z]{2}\s+\d{1,2}\s+by\s+11:59pm\b/);
   const afterDue = row.slice(dueIndex);
-  if (/\b[A-Z][a-z]{2}\s+\d{1,2}\s+at\s+\d{1,2}:\d{2}(?:am|pm)\b/.test(afterDue)) {
+  if (/\bComplete\b/.test(afterDue) || /\b[A-Z][a-z]{2}\s+\d{1,2}\s+at\s+\d{1,2}:\d{2}(?:am|pm)\b/.test(afterDue)) {
     note(`${title}: already submitted; skipped.`);
     process.exitCode = 0;
   } else {
