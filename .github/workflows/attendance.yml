@@ -2,7 +2,7 @@ name: English attendance
 on:
   workflow_dispatch:
   schedule:
-    - cron: '1 0 * * 1-5'
+    - cron: '6 0 * * 1-5'
       timezone: America/Chicago
   push:
     paths:
