@@ -7,6 +7,14 @@
         "False"
       ],
       "answer": "True"
+    },
+    {
+      "question": "Which term refers to the emotional feeling of a poem?",
+      "options": [
+        "Plot",
+        "Mood"
+      ],
+      "answer": "Mood"
     }
   ],
   "lastManualTrigger": "2026-10-06"
