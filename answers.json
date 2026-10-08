@@ -15,6 +15,14 @@
         "Mood"
       ],
       "answer": "Mood"
+    },
+    {
+      "question": "Which sentence uses capitalization correctly?",
+      "options": [
+        "We visited yellowstone national park.",
+        "We visited Yellowstone National Park."
+      ],
+      "answer": "We visited Yellowstone National Park."
     }
   ],
   "lastManualTrigger": "2026-10-08"
