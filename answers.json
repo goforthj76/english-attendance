@@ -23,6 +23,14 @@
         "We visited Yellowstone National Park."
       ],
       "answer": "We visited Yellowstone National Park."
+    },
+    {
+      "question": "Which poetic element refers to the pattern of beats in a poem?",
+      "options": [
+        "Stanza",
+        "Rhythm"
+      ],
+      "answer": "Rhythm"
     }
   ],
   "lastManualTrigger": "2026-10-19"
