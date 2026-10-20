@@ -31,6 +31,14 @@
         "Rhythm"
       ],
       "answer": "Rhythm"
+    },
+    {
+      "question": "Which sentence uses correct subject-verb agreement?",
+      "options": [
+        "The cats meows quietly.",
+        "The cats meow quietly."
+      ],
+      "answer": "The cats meow quietly."
     }
   ],
   "lastManualTrigger": "2026-10-20"
