@@ -39,8 +39,15 @@
         "The cats meow quietly."
       ],
       "answer": "The cats meow quietly."
+    },
+    {
+      "question": "A monologue is always spoken by two characters.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "False"
     }
   ],
   "lastManualTrigger": "2026-10-26"
 }
-
