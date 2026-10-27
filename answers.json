@@ -47,6 +47,14 @@
         "False"
       ],
       "answer": "False"
+    },
+    {
+      "question": "Which dramatic convention gives directions for actors?",
+      "options": [
+        "Monologue",
+        "Stage directions"
+      ],
+      "answer": "Stage directions"
     }
   ],
   "lastManualTrigger": "2026-10-27"
