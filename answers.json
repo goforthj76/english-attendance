@@ -63,6 +63,14 @@
         "Rhyme"
       ],
       "answer": "Rhyme"
+    },
+    {
+      "question": "Which sentence is punctuated correctly?",
+      "options": [
+        "I like apples oranges and bananas.",
+        "I like apples, oranges, and bananas."
+      ],
+      "answer": "I like apples, oranges, and bananas."
     }
   ],
   "lastManualTrigger": "2026-10-29"
