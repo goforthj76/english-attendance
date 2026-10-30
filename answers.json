@@ -71,6 +71,14 @@
         "I like apples, oranges, and bananas."
       ],
       "answer": "I like apples, oranges, and bananas."
+    },
+    {
+      "question": "A proper noun should begin with a capital letter.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "True"
     }
   ],
   "lastManualTrigger": "2026-10-30"
