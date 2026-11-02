@@ -79,6 +79,14 @@
         "False"
       ],
       "answer": "True"
+    },
+    {
+      "question": "Which figurative language repeats beginning consonant sounds?",
+      "options": [
+        "Onomatopoeia",
+        "Alliteration"
+      ],
+      "answer": "Alliteration"
     }
   ],
   "lastManualTrigger": "2026-11-02"
