@@ -95,6 +95,14 @@
         "Dramatic irony"
       ],
       "answer": "Dramatic irony"
+    },
+    {
+      "question": "A flashback interrupts the present action to show an earlier event.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "True"
     }
   ],
   "lastManualTrigger": "2026-11-06"
