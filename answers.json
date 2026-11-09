@@ -103,6 +103,14 @@
         "False"
       ],
       "answer": "True"
+    },
+    {
+      "question": "A verb is a word that shows an action, or a state of being.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "True"
     }
   ],
   "lastManualTrigger": "2026-11-09"
