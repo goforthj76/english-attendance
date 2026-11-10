@@ -111,6 +111,14 @@
         "False"
       ],
       "answer": "True"
+    },
+    {
+      "question": "Which figurative language is a direct comparison without using \"like\" or \"as\"?",
+      "options": [
+        "Simile",
+        "Metaphor"
+      ],
+      "answer": "Metaphor"
     }
   ],
   "lastManualTrigger": "2026-11-10"
