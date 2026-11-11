@@ -119,6 +119,14 @@
         "Metaphor"
       ],
       "answer": "Metaphor"
+    },
+    {
+      "question": "Theme is the central message or lesson of a poem.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "True"
     }
   ],
   "lastManualTrigger": "2026-11-11"
