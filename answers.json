@@ -127,6 +127,14 @@
         "False"
       ],
       "answer": "True"
+    },
+    {
+      "question": "An adjective describes a noun or pronoun.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "True"
     }
   ],
   "lastManualTrigger": "2026-11-12"
