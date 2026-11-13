@@ -135,6 +135,14 @@
         "False"
       ],
       "answer": "True"
+    },
+    {
+      "question": "Which dramatic convention is a conversation between characters?",
+      "options": [
+        "Dialogue",
+        "Soliloquy"
+      ],
+      "answer": "Dialogue"
     }
   ],
   "lastManualTrigger": "2026-11-13"
