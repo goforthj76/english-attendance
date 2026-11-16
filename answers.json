@@ -143,6 +143,14 @@
         "Soliloquy"
       ],
       "answer": "Dialogue"
+    },
+    {
+      "question": "Which sentence is written in the past tense?",
+      "options": [
+        "She walks home.",
+        "She walked home."
+      ],
+      "answer": "She walked home."
     }
   ],
   "lastManualTrigger": "2026-11-16"
