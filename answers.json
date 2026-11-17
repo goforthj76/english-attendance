@@ -151,6 +151,14 @@
         "She walked home."
       ],
       "answer": "She walked home."
+    },
+    {
+      "question": "Idioms should always be interpreted literally.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "False"
     }
   ],
   "lastManualTrigger": "2026-11-17"
