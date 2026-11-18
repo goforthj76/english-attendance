@@ -159,6 +159,14 @@
         "False"
       ],
       "answer": "False"
+    },
+    {
+      "question": "Stage directions help actors understand movement and actions.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "True"
     }
   ],
   "lastManualTrigger": "2026-11-18"
