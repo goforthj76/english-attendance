@@ -167,6 +167,14 @@
         "False"
       ],
       "answer": "True"
+    },
+    {
+      "question": "Which figurative language uses extreme exaggeration?",
+      "options": [
+        "Personification",
+        "Hyperbole"
+      ],
+      "answer": "Hyperbole"
     }
   ],
   "lastManualTrigger": "2026-11-19"
