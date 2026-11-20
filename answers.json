@@ -175,6 +175,14 @@
         "Hyperbole"
       ],
       "answer": "Hyperbole"
+    },
+    {
+      "question": "Repetition can emphasize an important idea in a poem.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "True"
     }
   ],
   "lastManualTrigger": "2026-11-20"
